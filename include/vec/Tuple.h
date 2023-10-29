@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef TUPLE_H
+#define TUPLE_H
 
 class Tuple {
 
@@ -30,3 +30,9 @@ public:
 	static Tuple createPoint(float, float, float);
 
 };
+
+static Tuple operator*(float scalar, const Tuple& t) {
+	return t * scalar;
+}
+
+#endif

@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\canvas\Canvas.h" />
     <ClInclude Include="..\include\utils\FloatUtils.h" />
+    <ClInclude Include="..\include\vec\Color.h" />
     <ClInclude Include="..\include\vec\Tuple.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\canvas\Canvas.cpp" />
+    <ClCompile Include="src\vec\Color.cpp" />
     <ClCompile Include="src\vec\Tuple.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

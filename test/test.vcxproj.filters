@@ -9,6 +9,12 @@
     <ClCompile Include="src\veec\TupleTests.cpp">
       <Filter>vec</Filter>
     </ClCompile>
+    <ClCompile Include="src\veec\ColorTests.cpp">
+      <Filter>vec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\canvas\CanvasTests.cpp">
+      <Filter>vec</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
