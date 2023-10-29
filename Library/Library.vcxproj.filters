@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\canvas">
+      <UniqueIdentifier>{37c857e2-30ac-4dd3-a4fc-2f348c8d404d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\vec">
+      <UniqueIdentifier>{edfc2597-b8f5-4a9d-a50b-d14a20c8ad41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\vec\Tuple.h">
@@ -27,16 +33,25 @@
     <ClInclude Include="..\include\canvas\Canvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\canvas\CanvasSaver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\canvas\stb_image_write.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\vec\Tuple.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\canvas\Canvas.cpp">
+      <Filter>Source Files\canvas</Filter>
     </ClCompile>
     <ClCompile Include="src\vec\Color.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\vec</Filter>
     </ClCompile>
-    <ClCompile Include="src\canvas\Canvas.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\vec\Tuple.cpp">
+      <Filter>Source Files\vec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\canvas\CanvasSaver.cpp">
+      <Filter>Source Files\canvas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

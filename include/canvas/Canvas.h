@@ -12,7 +12,6 @@ public:
 	size_t height;
 
 	Canvas(size_t width, size_t height, Color initColor = Color(0, 0, 0));
-	Canvas() = delete;
 	~Canvas();
 
 	Color getColorAt(size_t row, size_t column) const;

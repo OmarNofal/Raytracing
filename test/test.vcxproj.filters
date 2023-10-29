@@ -13,7 +13,7 @@
       <Filter>vec</Filter>
     </ClCompile>
     <ClCompile Include="src\canvas\CanvasTests.cpp">
-      <Filter>vec</Filter>
+      <Filter>canvas</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -22,6 +22,9 @@
     </Filter>
     <Filter Include="vec">
       <UniqueIdentifier>{83bb3fe0-2ea2-4021-986c-5bd5dbbd27c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="canvas">
+      <UniqueIdentifier>{b0baff5b-fcb1-4d87-957b-c28e10e7cb51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
