@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\vec\Vector.cpp">
+    <ClCompile Include="src\vec\Tuple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

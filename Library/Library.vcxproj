@@ -23,7 +23,7 @@
     <ClInclude Include="..\include\vec\Tuple.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\vec\Vector.cpp" />
+    <ClCompile Include="src\vec\Tuple.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

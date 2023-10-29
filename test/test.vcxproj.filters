@@ -6,7 +6,7 @@
     <ClCompile Include="src\utils\UtilTest.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\veec\VectorTests.cpp">
+    <ClCompile Include="src\veec\TupleTests.cpp">
       <Filter>vec</Filter>
     </ClCompile>
   </ItemGroup>

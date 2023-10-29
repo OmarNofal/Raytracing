@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="src\utils\UtilTest.cpp" />
-    <ClCompile Include="src\veec\VectorTests.cpp" />
+    <ClCompile Include="src\veec\TupleTests.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
