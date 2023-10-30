@@ -19,6 +19,12 @@
     <Filter Include="Source Files\vec">
       <UniqueIdentifier>{edfc2597-b8f5-4a9d-a50b-d14a20c8ad41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\linalg">
+      <UniqueIdentifier>{0216a148-fe03-4d52-8e88-ea91babb7144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\linalg">
+      <UniqueIdentifier>{3f328f90-c053-4ad5-8a39-9ab8a37b1b4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\vec\Tuple.h">
@@ -39,6 +45,9 @@
     <ClInclude Include="..\include\canvas\stb_image_write.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\linalg\Matrix.h">
+      <Filter>Header Files\linalg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -52,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="src\canvas\CanvasSaver.cpp">
       <Filter>Source Files\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\linalg\Matrix.cpp">
+      <Filter>Source Files\linalg</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

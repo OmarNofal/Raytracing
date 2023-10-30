@@ -11,8 +11,6 @@ public:
 	bool isVector() const;
 	bool isPoint() const;
 
-	Tuple() = delete;
-
 
 	bool operator==(const Tuple& t) const;
 	Tuple operator+(const Tuple& t) const;

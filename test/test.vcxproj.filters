@@ -6,14 +6,17 @@
     <ClCompile Include="src\utils\UtilTest.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\veec\TupleTests.cpp">
-      <Filter>vec</Filter>
-    </ClCompile>
-    <ClCompile Include="src\veec\ColorTests.cpp">
-      <Filter>vec</Filter>
-    </ClCompile>
     <ClCompile Include="src\canvas\CanvasTests.cpp">
       <Filter>canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vec\ColorTests.cpp">
+      <Filter>vec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vec\TupleTests.cpp">
+      <Filter>vec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\linalg\MatrixTests.cpp">
+      <Filter>linalg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -26,5 +29,11 @@
     <Filter Include="canvas">
       <UniqueIdentifier>{b0baff5b-fcb1-4d87-957b-c28e10e7cb51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="linalg">
+      <UniqueIdentifier>{bfdadfee-8b91-40e6-b280-c6467634e3b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

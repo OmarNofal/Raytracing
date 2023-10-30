@@ -41,9 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\CanvasTests.cpp" />
+    <ClCompile Include="src\linalg\MatrixTests.cpp" />
     <ClCompile Include="src\utils\UtilTest.cpp" />
-    <ClCompile Include="src\veec\ColorTests.cpp" />
-    <ClCompile Include="src\veec\TupleTests.cpp" />
+    <ClCompile Include="src\vec\ColorTests.cpp" />
+    <ClCompile Include="src\vec\TupleTests.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
