@@ -66,6 +66,22 @@ Matrix Matrix::operator*(const Matrix& m) const
 	return resultMatrix;
 }
 
+Matrix::Matrix(const Matrix& m)
+{
+	numRows = m.numRows;
+	numColumns = m.numColumns;
+	data = new float[numRows * numColumns];
+	memcpy(data, m.data, numRows * numColumns * sizeof(float));
+}
+
+Matrix::Matrix(Matrix&& m) noexcept
+{
+	numColumns = m.numColumns;
+	numRows = m.numRows;
+	data = m.data;
+	m.data = nullptr;
+}
+
 Matrix Matrix::transpose() const
 {
 	
@@ -81,7 +97,7 @@ Matrix Matrix::transpose() const
 	return result;
 }
 
-Tuple Matrix::operator*(const Tuple& t) const
+Tuple Mat4::operator*(const Tuple& t) const
 {
 	if (numColumns != 4) throw "MatrixMult: m1.nColumns != tupleSize(4)";
 	
@@ -130,6 +146,19 @@ Matrix Matrix::subMatrix(size_t row, size_t column) const {
 		}
 	}
 	return m;
+}
+
+Matrix& Matrix::operator=(const Matrix& m)
+{
+	if (data != nullptr)
+		delete[] data;
+
+	data = new float[m.numRows * m.numColumns];
+	memcpy(data, m.data, m.numRows * m.numColumns * sizeof(float));
+	numRows = m.numRows;
+	numColumns = m.numColumns;
+
+	return *this;
 }
 
 
@@ -249,4 +278,77 @@ Mat4 Mat4::inverse() const
 
 
 	return result;
+}
+
+
+Mat4 Mat4::operator*(const Mat4& m) const {
+	Matrix result = ((Matrix) *this) * ((Matrix)m);
+	Mat4& r1 = *(static_cast<Mat4*>(&result));
+	return r1;
+}
+
+Mat4 Mat4::translate(float x, float y, float z) const {
+
+	Mat4 translationMatrix(1.0f);
+	translationMatrix.setValue(0, 3, x);
+	translationMatrix.setValue(1, 3, y);
+	translationMatrix.setValue(2, 3, z);
+	
+
+	return translationMatrix * (*this);
+}
+
+Mat4 Mat4::scale(float x, float y, float z) const {
+	
+	Mat4 scaleMatrix(1.0f);
+	scaleMatrix.setValue(0, 0, x);
+	scaleMatrix.setValue(1, 1, y);
+	scaleMatrix.setValue(2, 2, z);
+
+	return scaleMatrix * (*this);
+}
+
+Mat4 Mat4::rotate(float radX, float radY, float radZ) const {
+
+	auto identity = Mat4::identity();
+
+	auto cosX = cosf(radX);
+	auto cosY = cosf(radY);
+	auto cosZ = cosf(radZ);
+	auto sinX = sinf(radX);
+	auto sinY = sinf(radY);
+	auto sinZ = sinf(radZ);
+
+	Mat4 xRotation{
+		1, 0, 0, 0,
+		0, cosX, -sinX, 0,
+		0, sinX, cosX, 0,
+		0, 0, 0, 1
+	};
+
+	Mat4 yRotation{
+		cosY, 0, sinY, 0,
+		0, 1, 0, 0,
+		-sinY, 0, cosY, 0,
+		0, 0, 0, 1
+	};
+
+	Mat4 zRotation{
+		cosZ, -sinZ, 0, 0,
+		sinZ, cosZ, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	return zRotation * (yRotation * xRotation);
+}
+
+Mat4 Mat4::shear(float xY, float xZ, float yX, float yZ, float zX, float zY) const
+{
+	return Mat4{
+		1, xY, xZ, 0,
+		yX, 1, yZ, 0,
+		zX, zY, 1, 0,
+		0, 0, 0, 1
+	};
 }

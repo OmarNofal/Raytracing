@@ -25,11 +25,14 @@ public:
 
 	bool operator==(const Matrix&) const;
 	Matrix operator*(const Matrix&) const;
+	Matrix(const Matrix& m);
+	Matrix(Matrix&& m) noexcept;
 	
 	Matrix transpose() const;
 	Matrix subMatrix(size_t row, size_t column) const;
 
-	Tuple operator*(const Tuple&) const;
+
+	Matrix& operator=(const Matrix& m);
 
 };
 
@@ -74,14 +77,24 @@ public:
 
 	static Mat4 identity();
 
+	Mat4 operator*(const Mat4&) const;
+	Tuple operator*(const Tuple&) const;
+
 	float minor(size_t row, size_t column) const;
 
 	float cofactor(size_t row, size_t column) const;
 
 	float determinant() const;
 
+
 	Mat4 inverse() const;
 
+	Mat4 translate(float x = 0.0f, float y = 0.0f, float z = 0.0f) const;
+
+	Mat4 scale(float x, float y, float z) const;
+
+	Mat4 rotate(float radX, float radY, float radZ) const;
+	Mat4 shear(float, float, float, float, float, float) const;
 };
 
 

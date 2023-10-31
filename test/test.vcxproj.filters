@@ -18,6 +18,9 @@
     <ClCompile Include="src\linalg\MatrixTests.cpp">
       <Filter>linalg</Filter>
     </ClCompile>
+    <ClCompile Include="TransformationTests.cpp">
+      <Filter>linalg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">

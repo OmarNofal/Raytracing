@@ -14,7 +14,7 @@ static float clampPixelColor(float num) {
 	return clamp(0, 1, num);
 }
 
-static void SaveCanvas(const Canvas& canvas) {
+static void SaveCanvas(const char* fileName, const Canvas& canvas) {
 
 	auto numPixels = canvas.width * canvas.height;
 
@@ -34,7 +34,7 @@ static void SaveCanvas(const Canvas& canvas) {
 
 	}
 
-	stbi_write_jpg("out.jpg", canvas.width, canvas.height, 3, image, 100);
+	stbi_write_jpg(fileName, canvas.width, canvas.height, 3, image, 100);
 
 	delete[] image;
 }

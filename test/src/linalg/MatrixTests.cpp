@@ -128,7 +128,6 @@ TEST(MatrixTests, MatrixTimesTuple) {
 	Tuple result{18, 24, 33, 1};
 
 	EXPECT_EQ(m * t, result);
-
 }
 
 
