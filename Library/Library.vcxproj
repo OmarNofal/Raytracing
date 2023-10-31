@@ -22,7 +22,10 @@
     <ClInclude Include="..\include\canvas\Canvas.h" />
     <ClInclude Include="..\include\canvas\CanvasSaver.h" />
     <ClInclude Include="..\include\canvas\stb_image_write.h" />
+    <ClInclude Include="..\include\geometry\Sphere.h" />
     <ClInclude Include="..\include\linalg\Matrix.h" />
+    <ClInclude Include="..\include\ray\Intersection.h" />
+    <ClInclude Include="..\include\ray\Ray.h" />
     <ClInclude Include="..\include\utils\FloatUtils.h" />
     <ClInclude Include="..\include\vec\Color.h" />
     <ClInclude Include="..\include\vec\Tuple.h" />
@@ -30,7 +33,10 @@
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp" />
     <ClCompile Include="src\canvas\CanvasSaver.cpp" />
+    <ClCompile Include="src\geometry\Intersection.cpp" />
+    <ClCompile Include="src\geometry\Sphere.cpp" />
     <ClCompile Include="src\linalg\Matrix.cpp" />
+    <ClCompile Include="src\ray\Ray.cpp" />
     <ClCompile Include="src\vec\Color.cpp" />
     <ClCompile Include="src\vec\Tuple.cpp" />
   </ItemGroup>

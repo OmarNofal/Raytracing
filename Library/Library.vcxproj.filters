@@ -25,6 +25,18 @@
     <Filter Include="Source Files\linalg">
       <UniqueIdentifier>{3f328f90-c053-4ad5-8a39-9ab8a37b1b4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ray">
+      <UniqueIdentifier>{66c1a6c7-1e57-49d1-ba68-3042e4693e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ray">
+      <UniqueIdentifier>{22aa1652-390a-487d-8b0e-c82d1f48af5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\geometry">
+      <UniqueIdentifier>{7bff45cb-f8e2-41f1-a132-0318f20bd195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\geometry">
+      <UniqueIdentifier>{d508efd3-94e9-4354-8f46-82c562bb0799}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\vec\Tuple.h">
@@ -48,6 +60,15 @@
     <ClInclude Include="..\include\linalg\Matrix.h">
       <Filter>Header Files\linalg</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ray\Ray.h">
+      <Filter>Header Files\ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\geometry\Sphere.h">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ray\Intersection.h">
+      <Filter>Header Files\ray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -64,6 +85,15 @@
     </ClCompile>
     <ClCompile Include="src\linalg\Matrix.cpp">
       <Filter>Source Files\linalg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ray\Ray.cpp">
+      <Filter>Source Files\ray</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Sphere.cpp">
+      <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Intersection.cpp">
+      <Filter>Source Files\ray</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

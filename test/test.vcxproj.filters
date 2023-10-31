@@ -21,6 +21,9 @@
     <ClCompile Include="TransformationTests.cpp">
       <Filter>linalg</Filter>
     </ClCompile>
+    <ClCompile Include="src\ray\RayTests.cpp">
+      <Filter>ray</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
@@ -34,6 +37,9 @@
     </Filter>
     <Filter Include="linalg">
       <UniqueIdentifier>{bfdadfee-8b91-40e6-b280-c6467634e3b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ray">
+      <UniqueIdentifier>{748673ee-9d0a-458f-8d70-c85bec40fb1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
