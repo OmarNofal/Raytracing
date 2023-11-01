@@ -24,6 +24,9 @@
     <ClCompile Include="src\ray\RayTests.cpp">
       <Filter>ray</Filter>
     </ClCompile>
+    <ClCompile Include="src\geometry\SphereTests.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
@@ -40,6 +43,9 @@
     </Filter>
     <Filter Include="ray">
       <UniqueIdentifier>{748673ee-9d0a-458f-8d70-c85bec40fb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{a41d1eb0-6456-4647-b62a-5041515f3853}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

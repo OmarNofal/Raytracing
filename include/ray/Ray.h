@@ -4,6 +4,7 @@
 #include <vec/Tuple.h>
 #include <geometry/Sphere.h>
 #include <ray/Intersection.h>
+#include <linalg/Matrix.h>
 
 class Ray {
 
@@ -17,5 +18,7 @@ public:
 	Tuple positionAt(float t) const;
 
 	std::vector<Intersection> findIntersections(const Sphere& s) const;
+
+	Ray transform(const Mat4& transform) const;
 
 };

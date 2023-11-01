@@ -10,6 +10,12 @@ Tuple Ray::positionAt(float t) const
 
 std::vector<Intersection> Ray::findIntersections(const Sphere& s) const
 {
+
+	Ray transformedRay = this->transform(s.transform.inverse());
+
+	auto& origin = transformedRay.origin;
+	auto& direction = transformedRay.direction;
+
 	auto sphereToRay = origin - Tuple::createPoint(0, 0, 0);
 
 	auto a = direction.dot(direction);
@@ -26,4 +32,15 @@ std::vector<Intersection> Ray::findIntersections(const Sphere& s) const
 	float t1 = (-b - sqrtD) / (2 * a);
 
 	return { {t1, s}, {t2, s} };
+}
+
+
+Ray Ray::transform(const Mat4& transform) const {
+
+	Ray newRay;
+
+	newRay.origin = transform * origin;
+	newRay.direction = transform * direction;
+
+	return newRay;
 }

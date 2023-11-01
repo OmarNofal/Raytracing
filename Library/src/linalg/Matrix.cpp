@@ -340,7 +340,7 @@ Mat4 Mat4::rotate(float radX, float radY, float radZ) const {
 		0, 0, 0, 1
 	};
 
-	return zRotation * (yRotation * xRotation);
+	return zRotation * (yRotation * xRotation) * (*this);
 }
 
 Mat4 Mat4::shear(float xY, float xZ, float yX, float yZ, float zX, float zY) const
@@ -350,5 +350,5 @@ Mat4 Mat4::shear(float xY, float xZ, float yX, float yZ, float zX, float zY) con
 		yX, 1, yZ, 0,
 		zX, zY, 1, 0,
 		0, 0, 0, 1
-	};
+	} * (*this);
 }

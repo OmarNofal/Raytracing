@@ -83,6 +83,23 @@ TEST(RayTests, RayInfrontOfSphereIntersection) {
 	EXPECT_EQ(intersections[1].t, -4.0f);
 }
 
+TEST(RayTests, RayTransformations) {
+
+	Ray r{ {1, 2, 3, 1}, {0, 1, 0, 0} };
+	Mat4 trans = Mat4(1.0f).translate(3, 4, 5);
+
+	auto translatedRay = r.transform(trans);
+
+	EXPECT_EQ(translatedRay.origin, Tuple::createPoint(4, 6, 8));
+	EXPECT_EQ(translatedRay.direction, Tuple::createVector(0, 1, 0));
+
+	Mat4 scaleMatrix = Mat4(1.0f).scale(2, 3, 4);
+	auto scaledRay = r.transform(scaleMatrix);
+
+	EXPECT_EQ(scaledRay.origin, Tuple::createPoint(2, 6, 12));
+	EXPECT_EQ(scaledRay.direction, Tuple::createVector(0, 3, 0));
+
+}
 
 TEST(IntersectionTests, IntersectionsHit) {
 
@@ -108,4 +125,23 @@ TEST(IntersectionTests, IntersectionsHit) {
 
 	EXPECT_EQ(findHit(allNegatives), allNegatives.end());
 
+}
+
+
+TEST(IntersectionTests, IntersectionsWithScaledSphere) {
+
+	Sphere s(Mat4::identity().scale(2,2,2));
+
+	Ray r(Tuple::createPoint(0, 0, -5.0f), Tuple::createVector(0, 0, 1));
+
+	auto intersections = r.findIntersections(s);
+
+	ASSERT_EQ(intersections.size(), 2);
+	EXPECT_EQ(intersections[0].t, 3);
+	EXPECT_EQ(intersections[1].t, 7);
+
+	Sphere s2(Mat4::identity().translate(5, 0, 0));
+	auto intersections2 = r.findIntersections(s2);
+
+	EXPECT_EQ(intersections2.size(), 0);
 }
