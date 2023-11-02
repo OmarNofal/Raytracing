@@ -7,6 +7,25 @@ Canvas::Canvas(size_t width, size_t height, Color initColor): width(width), heig
 	std::fill_n(pixels, size, initColor);
 }
 
+Canvas::Canvas(Canvas&& c) noexcept
+{
+	width = c.width;
+	height = c.height;
+
+	pixels = c.pixels;
+	c.pixels = nullptr;
+}
+
+Canvas& Canvas::operator=(Canvas&& c) noexcept
+{
+	width = c.width;
+	height = c.height;
+
+	pixels = c.pixels;
+	c.pixels = nullptr;
+	return *this;
+}
+
 Color Canvas::getColorAt(size_t row, size_t column) const
 {
 	return pixels[width * row + column];

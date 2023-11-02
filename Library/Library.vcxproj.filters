@@ -55,6 +55,12 @@
     <Filter Include="Source Files\scene">
       <UniqueIdentifier>{779e1103-629d-47a5-bf79-fba05891dc76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\camera">
+      <UniqueIdentifier>{5b82a3e3-5744-4ebc-b45e-bdd3a6ae5e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\camera">
+      <UniqueIdentifier>{695b3c46-8435-40c8-ab04-81a384a1fee1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\vec\Tuple.h">
@@ -96,6 +102,15 @@
     <ClInclude Include="..\include\scene\World.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
+    <ClInclude Include="Precomputation.h">
+      <Filter>Header Files\ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ray\Precomputation.h">
+      <Filter>Header Files\ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\camera\Camera.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -130,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="src\light\Light.cpp">
       <Filter>Source Files\light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ray\Precomputation.cpp">
+      <Filter>Source Files\ray</Filter>
+    </ClCompile>
+    <ClCompile Include="src\camera\Camera.cpp">
+      <Filter>Source Files\camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

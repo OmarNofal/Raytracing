@@ -102,3 +102,8 @@ public:
 };
 
 
+Mat4 viewMatrix(
+	Tuple from,
+	Tuple to,
+	Tuple up
+);

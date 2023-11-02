@@ -368,3 +368,22 @@ Mat4 Mat4::shear(float xY, float xZ, float yX, float yZ, float zX, float zY) con
 		0, 0, 0, 1
 	} * (*this);
 }
+
+Mat4 viewMatrix(Tuple from, Tuple to, Tuple up)
+{
+
+	auto forward = (to - from).normalized();
+	auto upN = up.normalized();
+	auto left = forward.cross(upN);
+
+	auto trueUp = left.cross(forward);
+
+
+
+	return Mat4{
+		left.x, left.y, left.z, 0,
+		trueUp.x, trueUp.y, trueUp.z, 0,
+		-forward.x, -forward.y, -forward.z, 0,
+		0, 0, 0, 1
+	} * Mat4(1.0f).translate(-from.x, -from.y, -from.z);
+}

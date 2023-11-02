@@ -20,3 +20,8 @@ Tuple Sphere::normalAt(const Tuple& p) const {
 
 	return worldNormal.normalized();
 }
+
+bool Sphere::operator==(const Sphere& s) const
+{
+	return transform == transform;
+}

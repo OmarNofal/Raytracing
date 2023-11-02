@@ -110,3 +110,51 @@ TEST(TransformationTests, ChainingTransformations) {
 
 
 }
+
+
+TEST(TransformationTests, ViewMatrix) {
+
+	Tuple from = Tuple::createPoint(0, 0, 0);
+	Tuple to = Tuple::createPoint(0, 0, -1);
+	Tuple up = Tuple::createVector(0, 1, 0);
+
+	auto m = viewMatrix(from, to, up);
+
+	EXPECT_EQ(m, Mat4(1.0f));
+
+	Tuple to2 = Tuple::createPoint(0, 0, 1);
+
+	auto m2 = viewMatrix(from, to2, up);
+	EXPECT_EQ(m2, Mat4(1.0f).scale(-1, 1, -1));
+
+}
+
+TEST(TransformationTests, ViewMatrixMovesWorld) {
+
+	Tuple from = Tuple::createPoint(0, 0, 8);
+	Tuple to = Tuple::createPoint(0, 0, 0);
+	Tuple up = Tuple::createVector(0, 1, 0);
+
+	auto m = viewMatrix(from, to, up);
+	EXPECT_EQ(m, Mat4(1.0f).translate(0, 0, -8));
+
+}
+
+TEST(TransformationTests, ViewMatrixAribitraryPosition) {
+
+	Tuple from = Tuple::createPoint(1, 3, 2);
+	Tuple to = Tuple::createPoint(4, -2, 8);
+	Tuple up = Tuple::createVector(1, 1, 0);
+
+	auto m = viewMatrix(from, to, up);
+	
+	auto expected = Mat4{
+		-0.50709, 0.50709, 0.67612, -2.36643,
+		0.76772, 0.60609, 0.12122, -2.82843,
+		-0.35857, 0.59761, -0.71714, 0.00000,
+		0.00000, 0.00000, 0.00000, 1.00000
+	};
+
+	EXPECT_EQ(m, expected);
+
+}

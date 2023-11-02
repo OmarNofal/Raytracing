@@ -14,6 +14,7 @@ public:
 	Color(float r = 0.0f, float g = 0.0f, float b = 0.0f) noexcept;
 
 	Color& operator=(const Color&);
+	Color(const Color&);
 
 	Color operator+(const Color&) const;
 	Color operator*(const Color&) const; // hadamard product

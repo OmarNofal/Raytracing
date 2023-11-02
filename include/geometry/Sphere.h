@@ -16,4 +16,5 @@ public:
 
 	Tuple normalAt(const Tuple& p) const;
 
+	bool operator==(const Sphere& s) const;
 };

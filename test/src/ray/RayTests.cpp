@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <geometry/Sphere.h>
 #include <ray/Intersection.h>
+#include <ray/Precomputation.h>
 
 TEST(RayTests, RayInit) {
 
@@ -144,4 +145,43 @@ TEST(IntersectionTests, IntersectionsWithScaledSphere) {
 	auto intersections2 = r.findIntersections(s2);
 
 	EXPECT_EQ(intersections2.size(), 0);
+}
+
+
+TEST(IntersectionTests, InteresectionPrecomputationOutsideSphere) {
+
+	Ray r(Tuple::createPoint(0, 0, -5), Tuple::createVector(0, 0, 1));
+
+	Sphere s;
+	Intersection i(4, s);
+
+	Precomputation p(i, r);
+
+	EXPECT_EQ(p.t, i.t);
+	EXPECT_EQ(p.s, i.s);
+	EXPECT_EQ(p.point, Tuple::createPoint(0, 0, -1));
+	EXPECT_EQ(p.eyeV, Tuple::createVector(0, 0, -1));
+	EXPECT_EQ(p.normalV, Tuple::createVector(0, 0, -1));
+	EXPECT_FALSE(p.inside);
+
+}
+
+
+TEST(IntersectionTests, InteresectionPrecomputationInsideSphere) {
+
+	Ray r(Tuple::createPoint(0, 0, 0), Tuple::createVector(0, 0, 1));
+
+	Sphere s;
+	Intersection i(1, s);
+
+	Precomputation p(i, r);
+
+	EXPECT_EQ(p.t, i.t);
+	EXPECT_EQ(p.s, i.s);
+	EXPECT_TRUE(p.inside);
+	EXPECT_EQ(p.point, Tuple::createPoint(0, 0, 1));
+	EXPECT_EQ(p.eyeV, Tuple::createVector(0, 0, -1));
+	EXPECT_EQ(p.normalV, Tuple::createVector(0, 0, -1));
+
+
 }

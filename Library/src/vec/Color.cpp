@@ -13,6 +13,13 @@ Color& Color::operator=(const Color& c)
 	return *this;
 }
 
+Color::Color(const Color& c)
+{
+	r = c.r;
+	g = c.g;
+	b = c.b;
+}
+
 Color Color::operator+(const Color& c) const
 {
 	return Color{ this->r + c.r, this->g + c.g, this->b + c.b };

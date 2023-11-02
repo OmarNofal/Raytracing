@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\camera\Camera.h" />
     <ClInclude Include="..\include\canvas\Canvas.h" />
     <ClInclude Include="..\include\canvas\CanvasSaver.h" />
     <ClInclude Include="..\include\canvas\stb_image_write.h" />
@@ -27,13 +28,16 @@
     <ClInclude Include="..\include\linalg\Matrix.h" />
     <ClInclude Include="..\include\material\Material.h" />
     <ClInclude Include="..\include\ray\Intersection.h" />
+    <ClInclude Include="..\include\ray\Precomputation.h" />
     <ClInclude Include="..\include\ray\Ray.h" />
     <ClInclude Include="..\include\scene\World.h" />
     <ClInclude Include="..\include\utils\FloatUtils.h" />
     <ClInclude Include="..\include\vec\Color.h" />
     <ClInclude Include="..\include\vec\Tuple.h" />
+    <ClInclude Include="Precomputation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\camera\Camera.cpp" />
     <ClCompile Include="src\canvas\Canvas.cpp" />
     <ClCompile Include="src\canvas\CanvasSaver.cpp" />
     <ClCompile Include="src\geometry\Intersection.cpp" />
@@ -41,6 +45,7 @@
     <ClCompile Include="src\light\Light.cpp" />
     <ClCompile Include="src\linalg\Matrix.cpp" />
     <ClCompile Include="src\material\Material.cpp" />
+    <ClCompile Include="src\ray\Precomputation.cpp" />
     <ClCompile Include="src\ray\Ray.cpp" />
     <ClCompile Include="src\scene\World.cpp" />
     <ClCompile Include="src\vec\Color.cpp" />

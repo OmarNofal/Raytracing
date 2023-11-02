@@ -3,7 +3,12 @@
 
 
 
-Intersection::Intersection(float t, const Sphere& s) : s(s), t(t) {};
+Intersection::Intersection(float t, Sphere s) : s(s), t(t) {}
+bool Intersection::operator<(const Intersection& i) const
+{
+	return t < i.t;
+}
+
 
 
 std::vector<Intersection>::const_iterator findHit(const std::vector<Intersection>& v) {
@@ -19,3 +24,5 @@ std::vector<Intersection>::const_iterator findHit(const std::vector<Intersection
 
 	return it;
 }
+
+

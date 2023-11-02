@@ -11,55 +11,65 @@
 #include <ray/Intersection.h>
 #include <material/Material.h>
 #include <light/Light.h>
+#include <camera/Camera.h>
 
 int main() {
 
-	Sphere s(Mat4::identity().translate(0, 0, 5));
-	Material m;
-	m.ambient = 0.1f;
-	m.diffuse = 1.0f;
-	m.specular = 0.7f;
-	m.color = Color(1.0f, 0.2f, 1.0f);
-	s.material = m;
+	Sphere floor;
+	floor.transform = Mat4(1.0f).scale(10 ,0.01, 10);
+	floor.material.color = Color(1, 0.9, 0.9);
+	floor.material.specular = 0;
 
-	Tuple lPos = Tuple::createPoint(-10, 10, -10);
-	Color lColor = Color(1.0, 1, 1);
-	Light light(lPos, lColor);
+	Sphere leftWall;
+	leftWall.transform = Mat4(1.0f)
+		.scale(10, 0.01, 10)
+		.rotate(M_PI / 2.0f, -M_PI / 4.0f, 0)
+		.translate(0, 0, 5);
+	leftWall.material = floor.material;
 
-	Canvas c(1000, 1000);
+	Sphere rightWall;
+	rightWall.transform = Mat4(1.0f)
+		.scale(10, 0.01, 10)
+		.rotate(M_PI / 2.0f, M_PI / 4.0f, 0)
+		.translate(0, 0, 5);
+	rightWall.material = floor.material;
 
-	Tuple origin = Tuple::createPoint(0, 0, -5.0f);
 
-	for (int i = 0; i < c.width; i++) {
+	Sphere middle;
+	middle.transform = Mat4(1.0f)
+		.translate(-0.5, 1.0, 0.5);
+	middle.material.color = Color(0.1, 1, 0.5);
+	middle.material.diffuse = 0.7f;
+	middle.material.specular = 0.3f;
 
-		for (int j = 0; j < c.height; j++) {
+	Sphere smallSphere;
+	smallSphere.transform = Mat4(1.0f)
+		.scale(0.5, 0.5, 0.5)
+		.translate(1.5f, 0.5f, -0.5f);
+	smallSphere.material.color = Color(0.5, 1, 0.1);
+	smallSphere.material.diffuse = 0.7f;
+	smallSphere.material.specular = 0.3f;
 
-			
-			float pixelZ = 0.0f;
-			float pixelX = (i / (c.width / 2.0f)) - 1.0f;
-			float pixelY = -(j / (c.height / 2.0f)) + 1.0f;
 
-			auto originToPx = Tuple::createPoint(pixelX, pixelY, pixelZ) - origin;
+	Light l(Tuple::createPoint(-10, 10, -10));
 
-			Ray r(origin, originToPx.normalized());
+	Camera c(1000, 1000, M_PI / 3.0f);
+	c.transform = viewMatrix(
+		Tuple::createPoint(0, 1.5, -5),
+		Tuple::createPoint(0, 1, 0),
+		Tuple::createVector(0, 1, 0)
+	);
 
-			auto intersections = r.findIntersections(s);
+	World w;
+	w.spheres.push_back(floor);
+	w.spheres.push_back(leftWall);
+	w.spheres.push_back(rightWall);
+	w.spheres.push_back(smallSphere);
+	w.spheres.push_back(middle);
 
-			auto hit = findHit(intersections);
-			if (hit != intersections.end()) {
+	w.lights.push_back(l);
 
-				auto hitPos = r.positionAt(hit->t);
-				auto normal = hit->s.normalAt(hitPos);
-
-				auto eyeV = -r.direction;
-
-				c.setColorAt(j, i, lighting(hit->s.material, light, hitPos, eyeV, normal));
-			}
-		}
-
-	}
-
-	SaveCanvas("First Sphere.jpg", c);
+	SaveCanvas("First Sphere.jpg", c.render(w, false));
 
 	ShellExecute(0, 0, L"First Sphere.jpg", 0, 0, SW_SHOW);
 }
