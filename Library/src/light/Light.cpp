@@ -13,15 +13,14 @@ Color lighting(
 	const Light& l,
 	const Tuple& pos,
 	const Tuple& eyeV,
-	const Tuple& normal
+	const Tuple& normal,
+	bool isInShadow
 ) {
-
 	auto effectiveColor = l.intensity * m.color;
+	auto ambient = effectiveColor * m.ambient;
+	if (isInShadow) return ambient;
 
 	auto lightV = (l.position - pos).normalized();
-
-	auto ambient = effectiveColor * m.ambient;
-
 	auto lightDotNormal = lightV.dot(normal);
 
 	auto diffuse = Color(0, 0, 0);

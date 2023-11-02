@@ -115,3 +115,47 @@ TEST(WorldTests, ColorAt) {
 
 }
 
+
+TEST(ShadowTests, IsInShadow) {
+
+	World w = testWorld();
+	const Light& l = w.lights[0];
+
+	Tuple p1 = Tuple::createPoint(0, 10, 0);
+	EXPECT_FALSE(w.isPointInShadow(p1, l));
+
+	Tuple p2 = Tuple::createPoint(10, -10, 10);
+	EXPECT_TRUE(w.isPointInShadow(p2, l));
+
+	Tuple p3 = Tuple::createPoint(-20, 20, -20);
+	EXPECT_FALSE(w.isPointInShadow(p3, l));
+
+	Tuple p4 = Tuple::createPoint(-2, 2, -2);
+	EXPECT_FALSE(w.isPointInShadow(p4, l));
+
+
+}
+
+TEST(ShadowTests, ShadeShadow) {
+
+	World w;
+	Light l(Tuple::createPoint(0, 0, -10));
+	w.lights.push_back(l);
+
+	Sphere s1;
+	Sphere s2;
+	s2.transform = Mat4(1.0f).translate(0, 0, 10);
+
+	w.spheres.push_back(s1);
+	w.spheres.push_back(s2);
+
+	Ray r(Tuple::createPoint(0, 0, 5), Tuple::createVector(0, 0, 1));
+
+	Intersection i(4, s2);
+
+	auto p = Precomputation(i, r);
+	auto c = w.shadeHit(p);
+
+	EXPECT_EQ(c, Color(0.1, 0.1, 0.1));
+
+}

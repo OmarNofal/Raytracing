@@ -23,9 +23,10 @@ Color World::shadeHit(const Precomputation& p) const
 	Color finalColor{ 0, 0 ,0 };
 
 	for (const auto& light : lights) {
+		bool inShadow = isPointInShadow(p.overPoint, light);
 		finalColor = finalColor + lighting(
 			p.s.material,
-			light, p.point, p.eyeV, p.normalV);
+			light, p.overPoint, p.eyeV, p.normalV, inShadow);
 	}
 
 	return finalColor;
@@ -43,5 +44,23 @@ Color World::colorAt(const Ray& r) const
 
 
 	return shadeHit(p);
+}
+
+bool World::isPointInShadow(const Tuple& p, const Light& l) const
+{
+
+	auto v = l.position - p;
+	auto distance = v.magnitude();
+	auto direction = v.normalized();
+
+	Ray r(p, direction);
+	auto intersections = intersectRay(r);
+
+	auto hit = findHit(intersections);
+	if (hit != intersections.end()) {
+		if (hit->t < distance) return true;
+	}
+
+	return false;
 }
 

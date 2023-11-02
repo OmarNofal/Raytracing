@@ -53,7 +53,7 @@ int main() {
 
 	Light l(Tuple::createPoint(-10, 10, -10));
 
-	Camera c(1000, 1000, M_PI / 3.0f);
+	Camera c(3000, 3000, M_PI / 3.0f);
 	c.transform = viewMatrix(
 		Tuple::createPoint(0, 1.5, -5),
 		Tuple::createPoint(0, 1, 0),
@@ -69,7 +69,7 @@ int main() {
 
 	w.lights.push_back(l);
 
-	SaveCanvas("First Sphere.jpg", c.render(w, false));
+	SaveCanvas("First Sphere.jpg", c.render(w, true));
 
 	ShellExecute(0, 0, L"First Sphere.jpg", 0, 0, SW_SHOW);
 }

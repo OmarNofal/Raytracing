@@ -17,4 +17,5 @@ Precomputation::Precomputation(const Intersection& i, const Ray& r) {
 		inside = false;
 	}
 
+	overPoint = point + EPSILON * normalV ;
 }

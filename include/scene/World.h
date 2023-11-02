@@ -19,4 +19,6 @@ public:
 
 	Color colorAt(const Ray& r) const;
 
+	bool isPointInShadow(const Tuple& p, const Light& l) const;
+
 };

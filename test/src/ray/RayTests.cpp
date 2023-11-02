@@ -185,3 +185,18 @@ TEST(IntersectionTests, InteresectionPrecomputationInsideSphere) {
 
 
 }
+
+TEST(IntersectionTests, IntersectionOffsetAcne) {
+
+	Ray r(Tuple::createPoint(0, 0, -5), Tuple::createVector(0, 0, 1));
+
+	Sphere s;
+	s.transform = Mat4(1.0f).translate(0, 0, 1);
+
+	Intersection i(5, s);
+
+	Precomputation p(i, r);
+
+	EXPECT_LT(p.overPoint.z, -(EPSILON / 2.0f));
+	EXPECT_GT(p.point.z, p.overPoint.z);
+}

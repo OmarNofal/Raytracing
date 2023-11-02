@@ -31,6 +31,7 @@ TEST(LightTests, LightingFunction) {
 
 	Tuple eye2 = Tuple::createVector(0, sqrtf(2) / 2, -sqrtf(2) / 2);
 	EXPECT_EQ(lighting(m, l1, p, eye2, nV), Color(1.0f, 1.0f, 1.0f));
+	EXPECT_EQ(lighting(m, l1, p, eye2, nV, true), Color(0.1f, 0.1f, 0.1f));
 
 	Light l2(Tuple::createPoint(0, 10, -10));
 

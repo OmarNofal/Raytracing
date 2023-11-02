@@ -2,6 +2,8 @@
 
 #include <ray/Ray.h>
 
+constexpr float EPSILON = 0.01f;
+
 class Precomputation {
 
 public:
@@ -10,6 +12,7 @@ public:
 	Tuple point;
 	Tuple eyeV;
 	Tuple normalV;
+	Tuple overPoint;
 	bool inside;
 
 

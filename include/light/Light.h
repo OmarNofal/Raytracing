@@ -22,5 +22,6 @@ Color lighting(
 	const Light& l,
 	const Tuple& pos,
 	const Tuple& eyeV,
-	const Tuple& normal
+	const Tuple& normal,
+	bool isInShadow = false
 );
