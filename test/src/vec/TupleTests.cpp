@@ -95,3 +95,15 @@ TEST(TupleTests, CrossProduct) {
 	EXPECT_EQ(v1.cross(v2), Tuple::createVector(-1, 2, -1));
 	EXPECT_EQ(v2.cross(v1), Tuple::createVector(1, -2, 1));
 }
+
+TEST(TupleTests, ReflectVector) {
+	Tuple v = Tuple::createVector(1, -1, 0);
+	Tuple n = Tuple::createVector(0, 1, 0);
+
+	EXPECT_EQ(v.reflect(n), Tuple::createVector(1, 1, 0));
+
+	Tuple v2 = Tuple::createVector(0, -1, 0);
+	Tuple n2 = Tuple::createVector(sqrtf(2) / 2.0f, sqrtf(2) / 2, 0);
+
+	EXPECT_EQ(v2.reflect(n2), Tuple::createVector(1, 0, 0));
+}

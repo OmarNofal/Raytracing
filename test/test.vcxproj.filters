@@ -27,6 +27,12 @@
     <ClCompile Include="src\geometry\SphereTests.cpp">
       <Filter>geometry</Filter>
     </ClCompile>
+    <ClCompile Include="src\light\LightTests.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\WorldTests.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
@@ -46,6 +52,12 @@
     </Filter>
     <Filter Include="geometry">
       <UniqueIdentifier>{a41d1eb0-6456-4647-b62a-5041515f3853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="light">
+      <UniqueIdentifier>{e4fe6ee1-c82f-4109-9847-5a66825df174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{469020fb-9043-4762-b1a5-0728d2b459de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,7 @@ Matrix::Matrix(size_t numRows, size_t numColumns, std::initializer_list<float> v
 
 Matrix::~Matrix() {
 	delete[] data;
+	delete cachedInverse;
 }
 
 bool Matrix::operator==(const Matrix& m) const {
@@ -72,6 +73,8 @@ Matrix::Matrix(const Matrix& m)
 	numColumns = m.numColumns;
 	data = new float[numRows * numColumns];
 	memcpy(data, m.data, numRows * numColumns * sizeof(float));
+
+	cachedInverse = nullptr;
 }
 
 Matrix::Matrix(Matrix&& m) noexcept
@@ -80,6 +83,9 @@ Matrix::Matrix(Matrix&& m) noexcept
 	numRows = m.numRows;
 	data = m.data;
 	m.data = nullptr;
+
+	cachedInverse = m.cachedInverse;
+	m.cachedInverse = nullptr;
 }
 
 Matrix Matrix::transpose() const
@@ -134,7 +140,7 @@ Tuple Mat4::operator*(const Tuple& t) const
 
 Matrix Matrix::subMatrix(size_t row, size_t column) const {
 
-	Matrix m{ this->numRows - 1, this->numColumns - 1 };
+	Matrix m{ this->numRows - 1, this->numColumns - 1, 0.0f };
 
 	for (int i = 0; i < (numRows - 1); i++) {
 		for (int j = 0; j < (numColumns - 1); j++) {
@@ -153,6 +159,9 @@ Matrix& Matrix::operator=(const Matrix& m)
 	if (data != nullptr)
 		delete[] data;
 
+	delete cachedInverse;
+	cachedInverse = nullptr;
+
 	data = new float[m.numRows * m.numColumns];
 	memcpy(data, m.data, m.numRows * m.numColumns * sizeof(float));
 	numRows = m.numRows;
@@ -170,6 +179,9 @@ float Matrix::getValueAt(size_t r, size_t c) const {
 void Matrix::setValue(size_t r, size_t c, float value) {
 	if (r >= numRows || r < 0 || c >= numColumns || c < 0) throw "OutOfBoundsException";
 	data[r * numColumns + c] = value;
+
+	delete cachedInverse;
+	cachedInverse = nullptr;
 }
 
 
@@ -230,7 +242,6 @@ Mat4 Mat4::identity() {
 	return Mat4(1.0f);
 }
 
-
 float Mat4::minor(size_t row, size_t column) const {
 	Matrix sub = this->subMatrix(row, column);
 	Mat3& subMatrix = *static_cast<Mat3*>(&sub);
@@ -257,6 +268,10 @@ float Mat4::determinant() const {
 Mat4 Mat4::inverse() const
 {
 
+	if (cachedInverse != nullptr) {
+		return *(Mat4*) cachedInverse;
+	}
+
 	float det = this->determinant();
 
 	if (compareFloats(det, 0.0f)) {
@@ -276,6 +291,7 @@ Mat4 Mat4::inverse() const
 
 	}
 
+	cachedInverse = new Mat4(result);
 
 	return result;
 }

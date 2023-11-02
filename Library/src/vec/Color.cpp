@@ -36,8 +36,7 @@ Color Color::operator*(float scalar) const
 bool Color::operator==(const Color& c) const {
 	return compareFloats(c.x, this->x)
 		&& compareFloats(c.y, this->y)
-		&& compareFloats(c.z, this->z)
-		&& compareFloats(c.w, this->w);
+		&& compareFloats(c.z, this->z);
 }
 
 Color Color::fromTuple(const Tuple& t) {

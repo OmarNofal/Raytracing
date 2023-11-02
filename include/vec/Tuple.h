@@ -20,12 +20,15 @@ public:
 
 	float magnitude() const;
 	Tuple normalized() const;
+	Tuple reflect(const Tuple&) const;
 
 	float dot(const Tuple&) const;
 	Tuple cross(const Tuple&) const;
 
 	static Tuple createVector(float, float, float);
 	static Tuple createPoint(float, float, float);
+
+	
 
 };
 

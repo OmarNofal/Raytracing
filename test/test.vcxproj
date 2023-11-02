@@ -42,8 +42,10 @@
   <ItemGroup>
     <ClCompile Include="src\canvas\CanvasTests.cpp" />
     <ClCompile Include="src\geometry\SphereTests.cpp" />
+    <ClCompile Include="src\light\LightTests.cpp" />
     <ClCompile Include="src\linalg\MatrixTests.cpp" />
     <ClCompile Include="src\ray\RayTests.cpp" />
+    <ClCompile Include="src\scene\WorldTests.cpp" />
     <ClCompile Include="src\utils\UtilTest.cpp" />
     <ClCompile Include="src\vec\ColorTests.cpp" />
     <ClCompile Include="src\vec\TupleTests.cpp" />

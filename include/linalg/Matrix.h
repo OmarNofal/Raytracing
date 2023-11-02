@@ -6,6 +6,9 @@
 
 class Matrix {
 
+protected:
+	mutable Matrix* cachedInverse = nullptr;
+
 public:
 	size_t numRows = 0;
 	size_t numColumns = 0;
@@ -68,6 +71,7 @@ public:
 };
 
 class Mat4 : public Matrix {
+
 
 public:
 	Mat4(float diagonalValues);

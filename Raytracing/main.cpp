@@ -9,12 +9,24 @@
 #include <ray/Ray.h>
 #include <Windows.h>
 #include <ray/Intersection.h>
+#include <material/Material.h>
+#include <light/Light.h>
 
 int main() {
 
-	Sphere s(Mat4::identity().scale(1.0f, 0.2f, 1.0f).rotate(0, 0, M_PI / 8.0f));
+	Sphere s(Mat4::identity().translate(0, 0, 5));
+	Material m;
+	m.ambient = 0.1f;
+	m.diffuse = 1.0f;
+	m.specular = 0.7f;
+	m.color = Color(1.0f, 0.2f, 1.0f);
+	s.material = m;
 
-	Canvas c(256, 256);
+	Tuple lPos = Tuple::createPoint(-10, 10, -10);
+	Color lColor = Color(1.0, 1, 1);
+	Light light(lPos, lColor);
+
+	Canvas c(1000, 1000);
 
 	Tuple origin = Tuple::createPoint(0, 0, -5.0f);
 
@@ -22,6 +34,7 @@ int main() {
 
 		for (int j = 0; j < c.height; j++) {
 
+			
 			float pixelZ = 0.0f;
 			float pixelX = (i / (c.width / 2.0f)) - 1.0f;
 			float pixelY = -(j / (c.height / 2.0f)) + 1.0f;
@@ -34,7 +47,13 @@ int main() {
 
 			auto hit = findHit(intersections);
 			if (hit != intersections.end()) {
-				c.setColorAt(j, i, Color(1.0f));
+
+				auto hitPos = r.positionAt(hit->t);
+				auto normal = hit->s.normalAt(hitPos);
+
+				auto eyeV = -r.direction;
+
+				c.setColorAt(j, i, lighting(hit->s.material, light, hitPos, eyeV, normal));
 			}
 		}
 

@@ -2,7 +2,6 @@
 #include <iostream>
 
 Canvas::Canvas(size_t width, size_t height, Color initColor): width(width), height(height) {
-	std::cout << "Width: " << width << "Height: " << height << std::endl;
 	auto size = width * height;
 	pixels = new Color[size];
 	std::fill_n(pixels, size, initColor);

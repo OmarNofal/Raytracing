@@ -61,6 +61,11 @@ Tuple Tuple::normalized() const
 	return Tuple(this->x/magnitude, this->y/magnitude, this->z/magnitude, this->w/magnitude);
 }
 
+Tuple Tuple::reflect(const Tuple& t) const
+{
+	return *this - 2 * this->dot(t) * t;
+}
+
 float Tuple::dot(const Tuple& t) const {
 	return this->x * t.x + this->y * t.y + this->z * t.z + this->w * t.w;
 }

@@ -37,6 +37,24 @@
     <Filter Include="Header Files\geometry">
       <UniqueIdentifier>{d508efd3-94e9-4354-8f46-82c562bb0799}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\light">
+      <UniqueIdentifier>{35e59553-caf3-407d-bda8-6b1c89f42700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\light">
+      <UniqueIdentifier>{c711e320-42e2-42dc-aad0-0e8f1f93033f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\material">
+      <UniqueIdentifier>{763530a0-3629-4cba-b5df-2ef57602f701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\material">
+      <UniqueIdentifier>{55b0db42-7dbc-4520-8585-4702af858a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\scene">
+      <UniqueIdentifier>{65f8e047-4a3e-4c2c-ae73-ba640987dead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scene">
+      <UniqueIdentifier>{779e1103-629d-47a5-bf79-fba05891dc76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\vec\Tuple.h">
@@ -69,6 +87,15 @@
     <ClInclude Include="..\include\ray\Intersection.h">
       <Filter>Header Files\ray</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\light\Light.h">
+      <Filter>Header Files\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\material\Material.h">
+      <Filter>Header Files\material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\scene\World.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -94,6 +121,15 @@
     </ClCompile>
     <ClCompile Include="src\geometry\Intersection.cpp">
       <Filter>Source Files\ray</Filter>
+    </ClCompile>
+    <ClCompile Include="src\material\Material.cpp">
+      <Filter>Source Files\material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\World.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\Light.cpp">
+      <Filter>Source Files\light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
