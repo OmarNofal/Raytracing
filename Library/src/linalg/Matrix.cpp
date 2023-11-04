@@ -74,7 +74,8 @@ Matrix::Matrix(const Matrix& m)
 	data = new float[numRows * numColumns];
 	memcpy(data, m.data, numRows * numColumns * sizeof(float));
 
-	cachedInverse = nullptr;
+	if (m.cachedInverse == nullptr) return;
+	*cachedInverse = *m.cachedInverse;
 }
 
 Matrix::Matrix(Matrix&& m) noexcept

@@ -20,8 +20,8 @@ static World testWorld() {
 	Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
 
 	w.lights.push_back(l);
-	w.spheres.push_back(s1);
-	w.spheres.push_back(s2);
+	w.shapes.push_back(s1);
+	w.shapes.push_back(s2);
 
 	return w;
 }
@@ -88,6 +88,6 @@ TEST(CameraTests, Render) {
 	c.transform = viewMatrix(from, to, up);
 
 	Canvas image = c.render(w);
-	EXPECT_EQ(image.getColorAt(5, 5), Color(0.38066, 0.47583, 0.2855));
+	EXPECT_EQ(image.getColorAt(5, 5), Color(0.38066f, 0.47583f, 0.2855f));
 
 }

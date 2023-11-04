@@ -40,6 +40,7 @@
     <IncludePath>C:\Users\omarw\source\repos\Raytracing\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="geometry\PlaneTests.cpp" />
     <ClCompile Include="src\camera\CameraTests.cpp" />
     <ClCompile Include="src\canvas\CanvasTests.cpp" />
     <ClCompile Include="src\geometry\SphereTests.cpp" />

@@ -3,6 +3,8 @@
 #include <initializer_list>
 #include <utils/FloatUtils.h>
 #include <vec/Tuple.h>
+#include <ostream>
+#include <string>
 
 class Matrix {
 
@@ -107,3 +109,20 @@ Mat4 viewMatrix(
 	Tuple to,
 	Tuple up
 );
+
+
+static std::ostream& operator<<(std::ostream& s, const Matrix& m) {
+
+	s << std::endl;
+	for (int r = 0; r < m.numRows; r++) {
+
+		for (int c = 0; c < m.numColumns; c++) {
+
+			s << std::to_string(m.getValueAt(r, c)) << "   ";
+
+		}
+
+		s << std::endl;
+	}
+	return s;
+}

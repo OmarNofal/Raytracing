@@ -32,6 +32,14 @@ public:
 
 };
 
+static Tuple point(float x, float y, float z) {
+	return Tuple::createPoint(x, y, z);
+}
+
+static Tuple vector(float x, float y, float z) {
+	return Tuple::createVector(x, y, z);
+}
+
 static Tuple operator*(float scalar, const Tuple& t) {
 	return t * scalar;
 }

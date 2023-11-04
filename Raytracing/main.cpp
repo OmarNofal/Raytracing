@@ -12,28 +12,9 @@
 #include <material/Material.h>
 #include <light/Light.h>
 #include <camera/Camera.h>
+#include <geometry/Plane.h>
 
 int main() {
-
-	Sphere floor;
-	floor.transform = Mat4(1.0f).scale(10 ,0.01, 10);
-	floor.material.color = Color(1, 0.9, 0.9);
-	floor.material.specular = 0;
-
-	Sphere leftWall;
-	leftWall.transform = Mat4(1.0f)
-		.scale(10, 0.01, 10)
-		.rotate(M_PI / 2.0f, -M_PI / 4.0f, 0)
-		.translate(0, 0, 5);
-	leftWall.material = floor.material;
-
-	Sphere rightWall;
-	rightWall.transform = Mat4(1.0f)
-		.scale(10, 0.01, 10)
-		.rotate(M_PI / 2.0f, M_PI / 4.0f, 0)
-		.translate(0, 0, 5);
-	rightWall.material = floor.material;
-
 
 	Sphere middle;
 	middle.transform = Mat4(1.0f)
@@ -53,19 +34,28 @@ int main() {
 
 	Light l(Tuple::createPoint(-10, 10, -10));
 
-	Camera c(3000, 3000, M_PI / 3.0f);
+	Camera c(4000, 4000, M_PI / 3.0f);
 	c.transform = viewMatrix(
-		Tuple::createPoint(0, 1.5, -5),
-		Tuple::createPoint(0, 1, 0),
-		Tuple::createVector(0, 1, 0)
+		point(0, 1.5, -5),
+		point(0, 1, 0),
+		vector(0, 1, 0)
 	);
 
+
+	Plane floor;
+	floor.material.color = Color(0.2f, 0.6f, 0.2f);
+
+	Plane backWall;
+	backWall.material.color = Color(0.4f, 0.2f, 0.4f);
+	backWall.transform = Mat4(1.0f).rotate(M_PI / 2.0f, 0, 0).translate(0, 0, 10.0f);
+	backWall.material.specular = 0.0f;
+
 	World w;
-	w.spheres.push_back(floor);
-	w.spheres.push_back(leftWall);
-	w.spheres.push_back(rightWall);
-	w.spheres.push_back(smallSphere);
-	w.spheres.push_back(middle);
+	//w.shapes.push_back(&floor);
+	w.shapes.push_back(&backWall);
+	w.shapes.push_back(&smallSphere);
+	w.shapes.push_back(&middle);
+	w.shapes.push_back(&floor);
 
 	w.lights.push_back(l);
 

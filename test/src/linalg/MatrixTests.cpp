@@ -147,14 +147,14 @@ TEST(MatrixTests, IdentityTimesTuple) {
 
 TEST(MatrixTests, MatrixTranspose) {
 	Mat4 m{
-		0, 9, 3, 0,
+		1, 9, 3, 0,
 		9, 8, 0, 8,
 		1, 8, 5, 3,
 		0, 0, 5, 8
 	};
 
 	Mat4 t{
-		0, 9, 1, 0,
+		1, 9, 1, 0,
 		9, 8, 8, 0,
 		3, 0, 5, 5,
 		0, 8, 3, 8

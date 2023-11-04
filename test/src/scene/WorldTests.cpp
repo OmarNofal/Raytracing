@@ -20,8 +20,8 @@ static World testWorld() {
 	Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
 
 	w.lights.push_back(l);
-	w.spheres.push_back(s1);
-	w.spheres.push_back(s2);
+	w.shapes.push_back(s1);
+	w.shapes.push_back(s2);
 
 	return w;
 }
@@ -30,7 +30,7 @@ static World testWorld() {
 TEST(WorldTests, WorldInit) {
 	World w;
 	EXPECT_TRUE(w.lights.empty());
-	EXPECT_TRUE(w.spheres.empty());
+	EXPECT_TRUE(w.shapes.empty());
 }
 
 TEST(WorldTests, WorldIntersection) {
@@ -51,9 +51,9 @@ TEST(WorldTests, IntersectionShadingOutside) {
 	World w = testWorld();
 
 	Ray r(Tuple::createPoint(0, 0, -5), Tuple::createVector(0, 0, 1));
-	const Sphere& s = w.spheres[0];
+	const Sphere& s = w.shapes[0];
 
-	Intersection i(4, s);
+	Intersection i(4, &s);
 
 	Precomputation p(i, r);
 
@@ -69,9 +69,9 @@ TEST(WorldTests, IntersectionShadingInside) {
 	w.lights.push_back(Light(Tuple::createPoint(0, 0.25, 0)));
 
 	Ray r(Tuple::createPoint(0, 0, 0), Tuple::createVector(0, 0, 1));
-	const Sphere& s = w.spheres[1];
+	const Sphere& s = w.shapes[1];
 
-	Intersection i(0.5, s);
+	Intersection i(0.5, &s);
 
 	Precomputation p(i, r);
 
@@ -108,10 +108,10 @@ TEST(WorldTests, ColorAt) {
 		Tuple::createVector(0, 0, -1)
 	);
 
-	w.spheres[1].material.ambient = 1.0f;
+	w.shapes[1].material.ambient = 1.0f;
 
 	Color c3 = w.colorAt(r3);
-	EXPECT_EQ(c3, w.spheres[1].material.color);
+	EXPECT_EQ(c3, w.shapes[1].material.color);
 
 }
 
@@ -146,12 +146,12 @@ TEST(ShadowTests, ShadeShadow) {
 	Sphere s2;
 	s2.transform = Mat4(1.0f).translate(0, 0, 10);
 
-	w.spheres.push_back(s1);
-	w.spheres.push_back(s2);
+	w.shapes.push_back(s1);
+	w.shapes.push_back(s2);
 
 	Ray r(Tuple::createPoint(0, 0, 5), Tuple::createVector(0, 0, 1));
 
-	Intersection i(4, s2);
+	Intersection i(4, &s2);
 
 	auto p = Precomputation(i, r);
 	auto c = w.shadeHit(p);

@@ -31,7 +31,7 @@ std::vector<Intersection> Ray::findIntersections(const Sphere& s) const
 	float t2 = (-b + sqrtD) / (2 * a);
 	float t1 = (-b - sqrtD) / (2 * a);
 
-	return { {t1, s}, {t2, s} };
+	return { {t1, &s}, {t2, &s} };
 }
 
 

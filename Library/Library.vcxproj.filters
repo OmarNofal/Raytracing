@@ -111,6 +111,12 @@
     <ClInclude Include="..\include\camera\Camera.h">
       <Filter>Header Files\camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\geometry\Shape.h">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\geometry\Plane.h">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -151,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="src\camera\Camera.cpp">
       <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Shape.cpp">
+      <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Plane.cpp">
+      <Filter>Source Files\geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

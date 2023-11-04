@@ -109,19 +109,19 @@ TEST(IntersectionTests, IntersectionsHit) {
 	using Intersections = std::vector<Intersection>;
 
 	Intersections allPositives{
-		{1, s}, {2, s}, {3, s}
+		{1, &s}, {2, &s}, {3, &s}
 	};
 
 	EXPECT_EQ(findHit(allPositives)->t, 1.0f);
 
 	Intersections someNegative{
-		{5, s}, {2, s}, {-1, s}
+		{5, &s}, {2, &s}, {-1, &s}
 	};
 
 	EXPECT_EQ(findHit(someNegative)->t, 2.0f);
 
 	Intersections allNegatives{
-		{-1, s}, {-5, s}, {-10, s}
+		{-1, &s}, {-5, &s}, {-10, &s}
 	};
 
 	EXPECT_EQ(findHit(allNegatives), allNegatives.end());
@@ -153,7 +153,7 @@ TEST(IntersectionTests, InteresectionPrecomputationOutsideSphere) {
 	Ray r(Tuple::createPoint(0, 0, -5), Tuple::createVector(0, 0, 1));
 
 	Sphere s;
-	Intersection i(4, s);
+	Intersection i(4, &s);
 
 	Precomputation p(i, r);
 
@@ -172,7 +172,7 @@ TEST(IntersectionTests, InteresectionPrecomputationInsideSphere) {
 	Ray r(Tuple::createPoint(0, 0, 0), Tuple::createVector(0, 0, 1));
 
 	Sphere s;
-	Intersection i(1, s);
+	Intersection i(1, &s);
 
 	Precomputation p(i, r);
 
@@ -193,7 +193,7 @@ TEST(IntersectionTests, IntersectionOffsetAcne) {
 	Sphere s;
 	s.transform = Mat4(1.0f).translate(0, 0, 1);
 
-	Intersection i(5, s);
+	Intersection i(5, &s);
 
 	Precomputation p(i, r);
 

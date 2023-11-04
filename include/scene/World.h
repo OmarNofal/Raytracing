@@ -1,5 +1,5 @@
 #include <light/Light.h>
-#include <geometry/Sphere.h>
+#include <geometry/Shape.h>
 #include <vector>
 #include <ray/Intersection.h>
 #include <ray/Ray.h>
@@ -9,7 +9,7 @@ class World {
 
 public:
 	std::vector<Light> lights;
-	std::vector<Sphere> spheres;
+	std::vector<Shape*> shapes;
 
 	World();
 

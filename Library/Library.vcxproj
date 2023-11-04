@@ -23,6 +23,8 @@
     <ClInclude Include="..\include\canvas\Canvas.h" />
     <ClInclude Include="..\include\canvas\CanvasSaver.h" />
     <ClInclude Include="..\include\canvas\stb_image_write.h" />
+    <ClInclude Include="..\include\geometry\Plane.h" />
+    <ClInclude Include="..\include\geometry\Shape.h" />
     <ClInclude Include="..\include\geometry\Sphere.h" />
     <ClInclude Include="..\include\light\Light.h" />
     <ClInclude Include="..\include\linalg\Matrix.h" />
@@ -41,6 +43,8 @@
     <ClCompile Include="src\canvas\Canvas.cpp" />
     <ClCompile Include="src\canvas\CanvasSaver.cpp" />
     <ClCompile Include="src\geometry\Intersection.cpp" />
+    <ClCompile Include="src\geometry\Plane.cpp" />
+    <ClCompile Include="src\geometry\Shape.cpp" />
     <ClCompile Include="src\geometry\Sphere.cpp" />
     <ClCompile Include="src\light\Light.cpp" />
     <ClCompile Include="src\linalg\Matrix.cpp" />

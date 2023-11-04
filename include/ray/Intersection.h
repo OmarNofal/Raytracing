@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geometry/Sphere.h>
+#include <geometry/Shape.h>
 #include <vector>
 
 class Intersection {
@@ -8,17 +8,16 @@ class Intersection {
 public:
 
 	float t = 0.0f;
-	Sphere s;
+	const Shape* s;
 
-	Intersection(float t, Sphere s);
+	Intersection(float t, const Shape* s) noexcept;
 
-	Intersection& operator=(const Intersection&) = default;
 
 	bool operator<(const Intersection&) const;
 
 };
 
-
+using Intersections = std::vector<Intersection>;
 
 
 std::vector<Intersection>::const_iterator findHit(const std::vector<Intersection>& v);

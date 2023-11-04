@@ -3,7 +3,7 @@
 
 
 
-Intersection::Intersection(float t, Sphere s) : s(s), t(t) {}
+Intersection::Intersection(float t, const Shape* s) noexcept : s(s), t(t) {}
 bool Intersection::operator<(const Intersection& i) const
 {
 	return t < i.t;

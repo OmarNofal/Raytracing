@@ -8,8 +8,8 @@ std::vector<Intersection> World::intersectRay(const Ray& r) const
 
 	std::vector<Intersection> result;
 
-	for (auto& obj : spheres) {
-		auto intersections = r.findIntersections(obj);
+	for (const auto& obj : shapes) {
+		auto intersections = obj->intersectRay(r);
 		result.insert(result.end(), intersections.begin(), intersections.end());
 	}
 
@@ -25,7 +25,7 @@ Color World::shadeHit(const Precomputation& p) const
 	for (const auto& light : lights) {
 		bool inShadow = isPointInShadow(p.overPoint, light);
 		finalColor = finalColor + lighting(
-			p.s.material,
+			p.s->material,
 			light, p.overPoint, p.eyeV, p.normalV, inShadow);
 	}
 

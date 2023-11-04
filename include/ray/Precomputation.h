@@ -2,20 +2,20 @@
 
 #include <ray/Ray.h>
 
-constexpr float EPSILON = 0.01f;
+constexpr float EPSILON = 0.005f;
 
 class Precomputation {
 
 public:
 	float t;
-	Sphere s;
+	const Shape* s;
 	Tuple point;
 	Tuple eyeV;
 	Tuple normalV;
 	Tuple overPoint;
 	bool inside;
 
-
+	
 	Precomputation(const Intersection& i, const Ray& r);
 
 }; 

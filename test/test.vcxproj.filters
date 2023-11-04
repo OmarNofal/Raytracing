@@ -36,6 +36,9 @@
     <ClCompile Include="src\camera\CameraTests.cpp">
       <Filter>camera</Filter>
     </ClCompile>
+    <ClCompile Include="geometry\PlaneTests.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">

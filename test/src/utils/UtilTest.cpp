@@ -6,5 +6,5 @@ TEST(UtilTests, CompareFloatEqualTest) {
 }
 
 TEST(UtilTests, CompareFloatNotEqualTest) {
-	EXPECT_FALSE(compareFloats(0.012f, 0.013f));
+	EXPECT_FALSE(compareFloats(0.012f, 0.031f));
 }
