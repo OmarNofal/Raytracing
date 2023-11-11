@@ -5,6 +5,9 @@
 #include <ray/Ray.h>
 #include <ray/Precomputation.h>
 
+
+#define DEFAULT_NUM_BOUNCES 4
+
 class World {
 
 public:
@@ -15,9 +18,10 @@ public:
 
 	std::vector<Intersection> intersectRay(const Ray& r) const;
 
-	Color shadeHit(const Precomputation& p) const;
+	Color shadeHit(const Precomputation& p, int remaining = DEFAULT_NUM_BOUNCES) const;
 
-	Color colorAt(const Ray& r) const;
+	Color colorAt(const Ray& r, int remaining = DEFAULT_NUM_BOUNCES) const;
+	Color reflectedColor(const Precomputation& p, int remaining = DEFAULT_NUM_BOUNCES) const;
 
 	bool isPointInShadow(const Tuple& p, const Light& l) const;
 

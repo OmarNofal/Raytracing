@@ -13,6 +13,7 @@ public:
 	Tuple eyeV;
 	Tuple normalV;
 	Tuple overPoint;
+	Tuple reflectv;
 	bool inside;
 
 	

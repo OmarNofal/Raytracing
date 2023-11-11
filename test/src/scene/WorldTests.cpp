@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include <ray/Ray.h>
 #include <ray/Precomputation.h>
+#include <geometry/Plane.h>
 
 
 Sphere s1;
@@ -161,4 +162,65 @@ TEST(ShadowTests, ShadeShadow) {
 
 	EXPECT_EQ(c, Color(0.1, 0.1, 0.1));
 
+}
+
+
+TEST(ReflectionTests, ReflectAgainstNonReflective) {
+
+	World w = testWorld();
+
+
+	Ray r(Tuple::createPoint(0, 0, 0), Tuple::createVector(0, 0, 1));
+
+	Intersection i(1, w.shapes[1]);
+
+	auto p = Precomputation(i, r);
+	auto c = w.shadeHit(p);
+
+	EXPECT_EQ(w.reflectedColor(p), Color::black());
+
+}
+
+
+TEST(ReflectionTests, ReflectAgainstReflective) {
+
+	World w = testWorld();
+
+	Plane p;
+	p.transform = Mat4(1.0f).translate(0, -1, 0);
+	p.material.reflective = 0.5f;
+
+	w.shapes.push_back(&p);
+
+	float root2 = sqrtf(2.0f);
+	Ray r(Tuple::createPoint(0, 0, -3), Tuple::createVector(0, -root2 / 2.0f, root2 / 2.0f));
+
+	Intersection i(root2, &p);
+
+	auto pc = Precomputation(i, r);
+
+	EXPECT_EQ(w.reflectedColor(pc), Color(0.19032f, 0.2379f, 0.14274f));
+	EXPECT_EQ(w.shadeHit(pc), Color(0.87677f, 0.92436f, 0.82918f));
+}
+
+
+TEST(ReflectionTests, InfiniteRecursion) {
+
+	World w;
+	
+	Plane p1;
+	p1.material.reflective = 1.0f;
+	p1.transform = Mat4(1.0f).translate(0, 1, 0);
+
+	Plane p2;
+	p2.material.reflective = 1.0f;
+	p2.transform = Mat4(1.0f).translate(0, -1, 0);
+
+	w.shapes.push_back(&p1);
+	w.shapes.push_back(&p2);
+
+
+	Ray r(point(0, 0, 0), vector(0, 1, 0));
+	
+	w.colorAt(r);
 }

@@ -43,7 +43,7 @@ int main() {
 
 	Light l(Tuple::createPoint(-10, 10, -10));
 
-	Camera c(1000, 1000, M_PI / 3.0f);
+	Camera c(5000, 5000, M_PI / 3.0f);
 	c.transform = viewMatrix(
 		point(0, 1.5, -5),
 		point(0, 1, 0),
@@ -53,6 +53,7 @@ int main() {
 
 	Plane floor;
 	floor.material.color = Color(0.2f, 0.6f, 0.2f);
+	floor.material.reflective = 0.3f;
 	floor.material.setPattern(new CheckerPattern(Color(), Color(1, 1, 1)));
 
 

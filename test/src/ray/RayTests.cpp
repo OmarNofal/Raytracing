@@ -3,6 +3,7 @@
 #include <geometry/Sphere.h>
 #include <ray/Intersection.h>
 #include <ray/Precomputation.h>
+#include <geometry/Plane.h>
 
 TEST(RayTests, RayInit) {
 
@@ -199,4 +200,16 @@ TEST(IntersectionTests, IntersectionOffsetAcne) {
 
 	EXPECT_LT(p.overPoint.z, -(EPSILON / 2.0f));
 	EXPECT_GT(p.point.z, p.overPoint.z);
+}
+
+
+TEST(IntersectionTests, CalculateReflectedVector) {
+
+	Plane s;
+	Ray r(Tuple::createPoint(0, 1, -1), Tuple::createVector(0, -sqrtf(2) / 2, sqrtf(2)/2));
+	Intersection i(sqrtf(2), &s);
+
+	Precomputation p(i, r);
+
+	EXPECT_EQ(p.reflectv, vector(0, sqrtf(2) / 2, sqrtf(2) / 2));
 }

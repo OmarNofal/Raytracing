@@ -15,5 +15,6 @@ Precomputation::Precomputation(const Intersection& i, const Ray& r): s(i.s), t(i
 		inside = false;
 	}
 
+	reflectv = r.direction.reflect(normalV);
 	overPoint = point + EPSILON * normalV ;
 }

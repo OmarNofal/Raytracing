@@ -18,7 +18,7 @@ std::vector<Intersection> World::intersectRay(const Ray& r) const
 	return result;
 }
 
-Color World::shadeHit(const Precomputation& p) const
+Color World::shadeHit(const Precomputation& p, int remaining) const
 {
 	Color finalColor{ 0, 0 ,0 };
 
@@ -30,10 +30,12 @@ Color World::shadeHit(const Precomputation& p) const
 			light, p.overPoint, p.eyeV, p.normalV, inShadow);
 	}
 
-	return finalColor;
+	auto reflected = reflectedColor(p, remaining);
+
+	return finalColor + reflected;
 }
 
-Color World::colorAt(const Ray& r) const
+Color World::colorAt(const Ray& r, int remaining) const
 {
 
 	const auto& intersections = intersectRay(r);
@@ -44,7 +46,17 @@ Color World::colorAt(const Ray& r) const
 	Precomputation p(*hit, r);
 
 
-	return shadeHit(p);
+	return shadeHit(p, remaining);
+}
+
+Color World::reflectedColor(const Precomputation& p, int remaining) const
+{
+	if (compareFloats(p.s->material.reflective, 0.0f) || remaining < 1) {
+		return Color::black();
+	}
+	Ray reflectedRay(p.overPoint, p.reflectv);
+	Color c = colorAt(reflectedRay, remaining - 1);
+	return c * p.s->material.reflective;
 }
 
 bool World::isPointInShadow(const Tuple& p, const Light& l) const

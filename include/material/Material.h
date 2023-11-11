@@ -12,6 +12,7 @@ public:
 	float diffuse = 0.9f;
 	float specular = 0.9f;
 	float shininess = 200.0f;
+	float reflective = 0.0f;
 	Color color = Color(1, 1, 1);
 	std::unique_ptr<Pattern> pattern;
 
