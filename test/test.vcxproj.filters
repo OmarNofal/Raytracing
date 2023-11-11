@@ -39,6 +39,9 @@
     <ClCompile Include="geometry\PlaneTests.cpp">
       <Filter>geometry</Filter>
     </ClCompile>
+    <ClCompile Include="material\PatternTests.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
@@ -67,6 +70,9 @@
     </Filter>
     <Filter Include="camera">
       <UniqueIdentifier>{910dc368-0e56-478a-8065-6d4c4bf0c85b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="material">
+      <UniqueIdentifier>{494b4e88-d709-45ab-8ec1-3dae33bdd1fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

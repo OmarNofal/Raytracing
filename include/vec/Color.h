@@ -23,6 +23,8 @@ public:
 	bool operator==(const Color&) const;
 
 	static Color fromTuple(const Tuple&);
+	static Color black() { return Color(0, 0, 0); };
+	static Color white() { return Color(1, 1, 1); };
 
 private:
 	using Tuple::x;

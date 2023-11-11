@@ -19,6 +19,7 @@ public:
 
 Color lighting(
 	const Material& m,
+	const Shape& s,
 	const Light& l,
 	const Tuple& pos,
 	const Tuple& eyeV,

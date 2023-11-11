@@ -4,6 +4,9 @@
 #include <math.h>
 #include <canvas/Canvas.h>
 
+static Sphere s1;
+static Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
+
 static World testWorld() {
 
 	World w;
@@ -11,17 +14,17 @@ static World testWorld() {
 	Light l;
 	l.position = Tuple::createPoint(-10, 10, -10);
 	l.intensity = Color(1.0f, 1.0f, 1.0f);
-	Sphere s1;
+
 	s1.transform = Mat4(1.0f);
 	s1.material.color = Color(0.8, 1.0, 0.6);
 	s1.material.diffuse = 0.7f;
 	s1.material.specular = 0.2f;
 
-	Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
+	
 
 	w.lights.push_back(l);
-	w.shapes.push_back(s1);
-	w.shapes.push_back(s2);
+	w.shapes.push_back(&s1);
+	w.shapes.push_back(&s2);
 
 	return w;
 }
@@ -89,5 +92,4 @@ TEST(CameraTests, Render) {
 
 	Canvas image = c.render(w);
 	EXPECT_EQ(image.getColorAt(5, 5), Color(0.38066f, 0.47583f, 0.2855f));
-
 }

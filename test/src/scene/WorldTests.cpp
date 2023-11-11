@@ -4,24 +4,27 @@
 #include <ray/Ray.h>
 #include <ray/Precomputation.h>
 
+
+Sphere s1;
+Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
+
 static World testWorld() {
 
 	World w;
 
-	Light l;
-	l.position = Tuple::createPoint(-10, 10, -10);
-	l.intensity = Color(1.0f, 1.0f, 1.0f);
-	Sphere s1;
 	s1.transform = Mat4(1.0f);
 	s1.material.color = Color(0.8, 1.0, 0.6);
 	s1.material.diffuse = 0.7f;
 	s1.material.specular = 0.2f;
 
-	Sphere s2(Mat4(1.0f).scale(0.5, 0.5, 0.5));
+	Light l;
+	l.position = Tuple::createPoint(-10, 10, -10);
+	l.intensity = Color(1.0f, 1.0f, 1.0f);
+	
 
 	w.lights.push_back(l);
-	w.shapes.push_back(s1);
-	w.shapes.push_back(s2);
+	w.shapes.push_back(&s1);
+	w.shapes.push_back(&s2);
 
 	return w;
 }
@@ -51,7 +54,7 @@ TEST(WorldTests, IntersectionShadingOutside) {
 	World w = testWorld();
 
 	Ray r(Tuple::createPoint(0, 0, -5), Tuple::createVector(0, 0, 1));
-	const Sphere& s = w.shapes[0];
+	const Shape& s = *w.shapes[0];
 
 	Intersection i(4, &s);
 
@@ -69,7 +72,7 @@ TEST(WorldTests, IntersectionShadingInside) {
 	w.lights.push_back(Light(Tuple::createPoint(0, 0.25, 0)));
 
 	Ray r(Tuple::createPoint(0, 0, 0), Tuple::createVector(0, 0, 1));
-	const Sphere& s = w.shapes[1];
+	const Shape& s = *w.shapes[1];
 
 	Intersection i(0.5, &s);
 
@@ -108,10 +111,10 @@ TEST(WorldTests, ColorAt) {
 		Tuple::createVector(0, 0, -1)
 	);
 
-	w.shapes[1].material.ambient = 1.0f;
+	w.shapes[1]->material.ambient = 1.0f;
 
 	Color c3 = w.colorAt(r3);
-	EXPECT_EQ(c3, w.shapes[1].material.color);
+	EXPECT_EQ(c3, w.shapes[1]->material.color);
 
 }
 
@@ -146,8 +149,8 @@ TEST(ShadowTests, ShadeShadow) {
 	Sphere s2;
 	s2.transform = Mat4(1.0f).translate(0, 0, 10);
 
-	w.shapes.push_back(s1);
-	w.shapes.push_back(s2);
+	w.shapes.push_back(&s1);
+	w.shapes.push_back(&s2);
 
 	Ray r(Tuple::createPoint(0, 0, 5), Tuple::createVector(0, 0, 1));
 

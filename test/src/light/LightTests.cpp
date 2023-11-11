@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <material/Material.h>
+#include <geometry/Sphere.h>
 
 TEST(LightTests, LightInit) {
 
@@ -19,6 +20,7 @@ TEST(LightTests, LightingFunction) {
 
 
 	Material m;
+	Sphere s;
 
 	auto p = Tuple::createPoint(0, 0, 0);
 
@@ -26,24 +28,24 @@ TEST(LightTests, LightingFunction) {
 	Tuple nV = Tuple::createVector(0, 0, -1);
 	Tuple eyeV = Tuple::createPoint(0, 0, -1);
 
-	EXPECT_EQ(lighting(m, l1, p, eyeV, nV), Color(1.9f, 1.9f, 1.9f) );
+	EXPECT_EQ(lighting(m, s, l1, p, eyeV, nV), Color(1.9f, 1.9f, 1.9f) );
 
 
 	Tuple eye2 = Tuple::createVector(0, sqrtf(2) / 2, -sqrtf(2) / 2);
-	EXPECT_EQ(lighting(m, l1, p, eye2, nV), Color(1.0f, 1.0f, 1.0f));
-	EXPECT_EQ(lighting(m, l1, p, eye2, nV, true), Color(0.1f, 0.1f, 0.1f));
+	EXPECT_EQ(lighting(m, s, l1, p, eye2, nV), Color(1.0f, 1.0f, 1.0f));
+	EXPECT_EQ(lighting(m, s, l1, p, eye2, nV, true), Color(0.1f, 0.1f, 0.1f));
 
 	Light l2(Tuple::createPoint(0, 10, -10));
 
-	EXPECT_EQ(lighting(m, l2, p, eyeV, nV), Color(0.7364f, 0.7364f, 0.7364f));
+	EXPECT_EQ(lighting(m, s, l2, p, eyeV, nV), Color(0.7364f, 0.7364f, 0.7364f));
 
 
 	Tuple eye3 = Tuple::createVector(0, -sqrtf(2) / 2, -sqrtf(2) / 2);
-	EXPECT_EQ(lighting(m, l2, p, eye3, nV), Color(1.6364f, 1.6364f, 1.6364f));
+	EXPECT_EQ(lighting(m, s, l2, p, eye3, nV), Color(1.6364f, 1.6364f, 1.6364f));
 
 	Light l3(Tuple::createPoint(0, 0, 10));
 
-	EXPECT_EQ(lighting(m, l3, p, eyeV, nV), Color(0.1, 0.1, 0.1));
+	EXPECT_EQ(lighting(m, s, l3, p, eyeV, nV), Color(0.1, 0.1, 0.1));
 
 
 }

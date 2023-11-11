@@ -26,6 +26,7 @@ Color World::shadeHit(const Precomputation& p) const
 		bool inShadow = isPointInShadow(p.overPoint, light);
 		finalColor = finalColor + lighting(
 			p.s->material,
+			*p.s,
 			light, p.overPoint, p.eyeV, p.normalV, inShadow);
 	}
 

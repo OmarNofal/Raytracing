@@ -117,6 +117,9 @@
     <ClInclude Include="..\include\geometry\Plane.h">
       <Filter>Header Files\geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\material\Pattern.h">
+      <Filter>Header Files\material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="src\geometry\Plane.cpp">
       <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\material\Pattern.cpp">
+      <Filter>Source Files\material</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 
 #include <light/Light.h>
 #include <cmath>
+#include <geometry/Shape.h>
 
 Light::Light(Tuple position, Color intensity): position(position), intensity(intensity)
 {
@@ -10,13 +11,19 @@ Light::Light(Tuple position, Color intensity): position(position), intensity(int
 
 Color lighting(
 	const Material& m,
+	const Shape& s,
 	const Light& l,
 	const Tuple& pos,
 	const Tuple& eyeV,
 	const Tuple& normal,
 	bool isInShadow
 ) {
-	auto effectiveColor = l.intensity * m.color;
+	Color color = m.color;
+	if (m.pattern.get() != nullptr) {
+		color = m.pattern->getColorAtObject(s, pos);
+	}
+
+	auto effectiveColor = l.intensity * color;
 	auto ambient = effectiveColor * m.ambient;
 	if (isInShadow) return ambient;
 

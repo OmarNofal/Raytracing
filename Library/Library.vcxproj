@@ -29,6 +29,7 @@
     <ClInclude Include="..\include\light\Light.h" />
     <ClInclude Include="..\include\linalg\Matrix.h" />
     <ClInclude Include="..\include\material\Material.h" />
+    <ClInclude Include="..\include\material\Pattern.h" />
     <ClInclude Include="..\include\ray\Intersection.h" />
     <ClInclude Include="..\include\ray\Precomputation.h" />
     <ClInclude Include="..\include\ray\Ray.h" />
@@ -49,6 +50,7 @@
     <ClCompile Include="src\light\Light.cpp" />
     <ClCompile Include="src\linalg\Matrix.cpp" />
     <ClCompile Include="src\material\Material.cpp" />
+    <ClCompile Include="src\material\Pattern.cpp" />
     <ClCompile Include="src\ray\Precomputation.cpp" />
     <ClCompile Include="src\ray\Ray.cpp" />
     <ClCompile Include="src\scene\World.cpp" />
