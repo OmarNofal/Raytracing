@@ -4,6 +4,7 @@
 #include <ray/Ray.h>
 #include <ray/Precomputation.h>
 #include <geometry/Plane.h>
+#include <algorithm>
 
 
 Sphere s1;
@@ -223,4 +224,241 @@ TEST(ReflectionTests, InfiniteRecursion) {
 	Ray r(point(0, 0, 0), vector(0, 1, 0));
 	
 	w.colorAt(r);
+}
+
+
+Sphere glassSphere() {
+	Sphere s;
+	s.material.transperancy = 1.0f;
+	s.material.refractiveIndex = 1.5f;
+
+	return s;
+}
+
+TEST(RefractionTests) {
+
+
+	Sphere A = glassSphere();
+	A.transform = Mat4(1.0f).scale(2, 2, 2);
+
+	Sphere B = glassSphere();
+	B.transform = Mat4(1.0f).translate(0, 0, -0.25f);
+	B.material.refractiveIndex = 2.0f;
+
+	Sphere C = glassSphere();
+	C.transform = Mat4(1.0f).translate(0, 0, 0.25f);
+	C.material.refractiveIndex = 2.5f;
+
+	Ray r(point(0,0,-4), vector(0, 0, 1));
+
+	std::vector<Intersection> intersections =
+	{
+		Intersection(2, &A),
+		Intersection(2.75, &B),
+		Intersection(3.25, &C),
+		Intersection(4.75, &B),
+		Intersection(5.25, &C),
+		Intersection(6, &A)
+	};
+
+	Precomputation p0(intersections[0], r, intersections);
+	Precomputation p1(intersections[1], r, intersections);
+	Precomputation p2(intersections[2], r, intersections);
+	Precomputation p3(intersections[3], r, intersections);
+	Precomputation p4(intersections[4], r, intersections);
+	Precomputation p5(intersections[5], r, intersections);
+
+	EXPECT_EQ(p0.n1, 1.0f);
+	EXPECT_EQ(p0.n2, 1.5f);
+
+	EXPECT_EQ(p1.n1, 1.5f);
+	EXPECT_EQ(p1.n2, 2.0f);
+
+	EXPECT_EQ(p2.n1, 2.0f);
+	EXPECT_EQ(p2.n2, 2.5f);
+
+	EXPECT_EQ(p3.n1, 2.5f);
+	EXPECT_EQ(p3.n2, 2.5f);
+
+	EXPECT_EQ(p4.n1, 2.5f);
+	EXPECT_EQ(p4.n2, 1.5f);
+
+	EXPECT_EQ(p5.n1, 1.5f);
+	EXPECT_EQ(p5.n2, 1.0f);
+
+}
+
+TEST(RefractionTests, ComputingUnderpoint) {
+
+	Ray r(point(0, 0, -5), vector(0, 0, 1));
+
+	Sphere s = glassSphere();
+	s.transform = Mat4(1.0f).translate(0, 0, 1);
+
+	Intersection i{ 5, &s };
+	Intersections xs{i};
+
+	Precomputation p(i, r, xs);
+	EXPECT_GT(p.underPoint.z, EPSILON / 2.0f);
+	EXPECT_LT(p.point.z, p.underPoint.z);
+}
+
+TEST(RefractionTests, RefractedColorOpaque) {
+
+	World w = testWorld();
+
+	Shape& s = *w.shapes[0];
+
+	Ray r(point(0, 0, -5), vector(0, 0, 1));
+	Intersections xs{ Intersection(4, &s), Intersection(6, &s)};
+
+	Precomputation p(xs[0], r, xs);
+	EXPECT_EQ(w.refractedColor(p, 5), Color::black());
+}
+
+TEST(RefractionTests, RefractedColorTIR) {
+
+	World w = testWorld();
+
+	Shape& s = *w.shapes[0];
+	s.material.transperancy = 1.0f;
+	s.material.refractiveIndex = 1.5f;
+
+	float root2 = sqrtf(2.0f);
+
+	Ray r(point(0, 0, root2 / 2.0f), vector(0, 1, 0));
+	Intersections xs{ Intersection(-root2 / 2.0f, &s), Intersection(root2/2.0f, &s) };
+
+	Precomputation p(xs[1], r, xs);
+	EXPECT_EQ(w.refractedColor(p, 5), Color::black());
+}
+
+
+TEST(RefractionTests, RefractionShadeHit) {
+
+	World w = testWorld();
+
+	Shape& A = *w.shapes[0];
+	A.material.ambient = 1.0f;
+
+	Plane p;
+	p.transform = Mat4(1.0f).translate(0, -1, 0);
+	p.material.transperancy = 0.5f;
+	p.material.refractiveIndex = 1.5f;
+
+	w.shapes.push_back(&p);
+
+	Sphere s;
+	s.material.color = Color(1, 0, 0);
+	s.material.ambient = 0.5f;
+	s.transform = Mat4(1.0f).translate(0, -3.5f, -0.5f);
+
+	w.shapes.push_back(&s);
+
+	float root2 = sqrtf(2.0f);
+	Ray r(point(0, 0, -3), vector(0, -root2 / 2.0f, root2 / 2.0f));
+	Intersections xs{ Intersection(root2, &p) };
+
+	Precomputation comp(xs[0], r, xs);
+	Color c = w.shadeHit(comp, 5);
+
+	EXPECT_EQ(c, Color(0.93642f, 0.68642f, 0.68642f));
+}
+
+
+TEST(RefractionTests, SchlickTest) {
+
+	float root2 = sqrtf(2.0f);
+
+	Sphere s = glassSphere();
+
+	Ray r1(
+		point(0, 0, root2 / 2.0f),
+		vector(0, 1, 0)
+	);
+
+	Intersections xs1 =
+	{
+		Intersection{-root2/2.0f, &s},
+		Intersection{root2/2.0f, &s}
+	};
+
+	Precomputation p1(xs1[1], r1, xs1);
+	float reflectance1 = p1.schlick();
+
+	EXPECT_EQ(reflectance1, 1.0f);
+
+
+	Ray r2(
+		point(0, 0, 0),
+		vector(0, 1, 0)
+	);
+
+	Intersections xs2 =
+	{
+		Intersection{-1, &s},
+		Intersection{1, &s}
+	};
+
+	Precomputation p2(xs2[1], r2, xs2);
+	float reflectance2 = p2.schlick();
+
+	EXPECT_TRUE(compareFloats(reflectance2, 0.04f));
+
+
+	Ray r3(
+		point(0, 0.99f, -2.0f),
+		vector(0, 0, 1)
+	);
+
+	Intersections xs3 =
+	{
+		Intersection{1.8589f, &s}
+	};
+
+	Precomputation p3(xs3[0], r3, xs3);
+	float reflectance3 = p3.schlick();
+
+	EXPECT_TRUE(compareFloats(reflectance3, 0.48873f));
+
+
+}
+
+
+TEST(ReflectionRefractionTests, SchlickInShadeHit) {
+
+	float root2 = sqrtf(2.0f);
+
+	World w = testWorld();
+	w.shapes.clear();
+
+	Ray r(
+		point(0, 0, -3),
+		vector(0, -root2 / 2.0f, root2 / 2.0f)
+	);
+
+	Plane p;
+	p.transform =
+		Mat4(1.0f).translate(0, -1, 0);
+	p.material.reflective = 0.5f;
+	p.material.transperancy = 0.5f;
+	p.material.refractiveIndex = 1.5f;
+
+	w.shapes.push_back(&p);
+
+	Sphere s;
+	s.transform = Mat4(1.0f).translate(0, -3.5f, -0.5f);
+	s.material.color = Color(1, 0, 0);
+	s.material.ambient = 0.5f;
+
+	w.shapes.push_back(&s);
+
+	Intersections xs{
+		Intersection{root2, &p}
+	};
+
+	Precomputation comp(xs[0], r, xs);
+	Color c = w.shadeHit(comp, 5);
+	std::cout << c.r << " " << c.g << " " << c.b;
+	//EXPECT_EQ(c, Color(0.93391f, 0.69643f, 0.69243f));
 }

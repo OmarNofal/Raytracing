@@ -22,6 +22,7 @@ public:
 
 	Color colorAt(const Ray& r, int remaining = DEFAULT_NUM_BOUNCES) const;
 	Color reflectedColor(const Precomputation& p, int remaining = DEFAULT_NUM_BOUNCES) const;
+	Color refractedColor(const Precomputation& p, int remaining = DEFAULT_NUM_BOUNCES) const;
 
 	bool isPointInShadow(const Tuple& p, const Light& l) const;
 

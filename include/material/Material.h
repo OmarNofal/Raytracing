@@ -13,6 +13,9 @@ public:
 	float specular = 0.9f;
 	float shininess = 200.0f;
 	float reflective = 0.0f;
+	float transperancy = 0.0f;
+	float refractiveIndex = 1.0f;
+
 	Color color = Color(1, 1, 1);
 	std::unique_ptr<Pattern> pattern;
 

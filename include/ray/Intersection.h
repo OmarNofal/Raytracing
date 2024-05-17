@@ -12,7 +12,7 @@ public:
 
 	Intersection(float t, const Shape* s) noexcept;
 
-
+	bool operator==(const Intersection&) const;
 	bool operator<(const Intersection&) const;
 
 };

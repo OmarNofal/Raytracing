@@ -40,6 +40,8 @@
     <IncludePath>C:\Users\omarw\source\repos\Raytracing\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="geometry\CubeTests.cpp" />
+    <ClCompile Include="geometry\CylinderTests.cpp" />
     <ClCompile Include="geometry\PlaneTests.cpp" />
     <ClCompile Include="material\PatternTests.cpp" />
     <ClCompile Include="src\camera\CameraTests.cpp" />
@@ -98,6 +100,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>C:\Users\omarw\Documents\Programming\Visual Studio Projects\Raytracing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

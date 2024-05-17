@@ -120,6 +120,12 @@
     <ClInclude Include="..\include\material\Pattern.h">
       <Filter>Header Files\material</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\geometry\Cube.h">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\geometry\Cylinder.h">
+      <Filter>Header Files\geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\canvas\Canvas.cpp">
@@ -169,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="src\material\Pattern.cpp">
       <Filter>Source Files\material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Cube.cpp">
+      <Filter>Source Files\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\Cylinder.cpp">
+      <Filter>Source Files\geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

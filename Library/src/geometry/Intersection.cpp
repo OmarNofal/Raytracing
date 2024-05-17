@@ -4,6 +4,10 @@
 
 
 Intersection::Intersection(float t, const Shape* s) noexcept : s(s), t(t) {}
+bool Intersection::operator==(const Intersection& i) const
+{
+	return t == i.t && s == i.s;
+}
 bool Intersection::operator<(const Intersection& i) const
 {
 	return t < i.t;

@@ -23,6 +23,8 @@
     <ClInclude Include="..\include\canvas\Canvas.h" />
     <ClInclude Include="..\include\canvas\CanvasSaver.h" />
     <ClInclude Include="..\include\canvas\stb_image_write.h" />
+    <ClInclude Include="..\include\geometry\Cube.h" />
+    <ClInclude Include="..\include\geometry\Cylinder.h" />
     <ClInclude Include="..\include\geometry\Plane.h" />
     <ClInclude Include="..\include\geometry\Shape.h" />
     <ClInclude Include="..\include\geometry\Sphere.h" />
@@ -40,9 +42,11 @@
     <ClInclude Include="Precomputation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="geometry\Cylinder.cpp" />
     <ClCompile Include="src\camera\Camera.cpp" />
     <ClCompile Include="src\canvas\Canvas.cpp" />
     <ClCompile Include="src\canvas\CanvasSaver.cpp" />
+    <ClCompile Include="src\geometry\Cube.cpp" />
     <ClCompile Include="src\geometry\Intersection.cpp" />
     <ClCompile Include="src\geometry\Plane.cpp" />
     <ClCompile Include="src\geometry\Shape.cpp" />
@@ -149,6 +153,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\omarw\Documents\Programming\Visual Studio Projects\Raytracing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -14,4 +14,5 @@ public:
 
 	Precomputation(const Intersection& i, const Ray& r);
 
+	float schlick() const;
 };

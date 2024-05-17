@@ -15,6 +15,7 @@ public:
 	Sphere(const Mat4& t);
 	Sphere(Mat4&& t);
 	Sphere();
+	Sphere(const Sphere& s);
 
 	bool operator==(const Sphere& s) const;
 };
