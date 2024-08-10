@@ -15,14 +15,15 @@
 #include <geometry/Plane.h>
 #include <geometry/Cube.h>
 #include <geometry/Cylinder.h>
+#include <geometry/Cone.h>
 
 int main() {
 
 
 
-	Camera c(2048, 2048, M_PI / 3.0f);
+	Camera c(1000, 1000, M_PI / 2);
 	c.transform = viewMatrix(
-		point(-9, 0, 0),
+		point(-1, 0, 8),
 		point(1, 0, 0),
 		vector(0, 1, 0)
 	);
@@ -43,14 +44,15 @@ int main() {
 	mirror.material.color = Color(0.5f, 0.3f, 0.3f);
 	mirror.material.diffuse = 0.2f;
 
-	Cylinder cyl;
+	Cone cyl;
 
-	cyl.transform = Mat4(1.0f).rotate(M_PI / 4, M_PI / 4, 0).translate(4.0f, 0, 0);
+	cyl.maximum = 0;
+	cyl.minimum = -1.06f;
+	cyl.transform = Mat4(1.0f).rotate(-M_PI / 2.0f, 0, -M_PI / 3.0f).translate(4.0f, 0, 0);
 	cyl.material.ambient = 0.2f;
 	cyl.material.color = Color(0.3f, 0.5f, 0.3f);
-	cyl.material.specular = 0.0f;
-	cyl.minimum = 1.4f;
-	cyl.maximum = 2.0f;
+	cyl.material.pattern.reset(new StripePattern({ 0, 0, 0 }, { 1,1,1 }));
+	cyl.material.pattern->transform = Mat4(1.0).scale(0.25, 0.25, 0.25);
 	cyl.closed = true;
 
 	World w;
@@ -59,7 +61,7 @@ int main() {
 	w.shapes.push_back(&cyl);
 
 	Light l;
-	l.position = point(0, 0, 0);
+	l.position = point(0, 2, 0);
 
 	w.lights.push_back(l);
 

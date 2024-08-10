@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{b54b89c9-43df-42a9-8663-c7af20769cb1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -40,6 +40,7 @@
     <IncludePath>C:\Users\omarw\source\repos\Raytracing\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="geometry\ConeTests.cpp" />
     <ClCompile Include="geometry\CubeTests.cpp" />
     <ClCompile Include="geometry\CylinderTests.cpp" />
     <ClCompile Include="geometry\PlaneTests.cpp" />

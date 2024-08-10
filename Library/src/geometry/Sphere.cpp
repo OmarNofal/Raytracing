@@ -9,6 +9,11 @@ Sphere::Sphere(Mat4&& t): Shape(t) {}
 
 Sphere::Sphere() {};
 
+Sphere::Sphere(const Sphere& other) {
+	this->transform = other.transform;
+}
+
+
 Tuple Sphere::localNormalAt(const Tuple& p) const {
 	auto objectNormal = p - Tuple::createPoint(0, 0, 0);
 	return objectNormal;
